@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sid的鳴潮智慧素材需求計算器</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-cyan': '#00f0ff',
+                        'neon-teal': '#08d6c8',
+                        'neon-emerald': '#00ffa3',
+                        'neon-amber': '#ffb347',
+                        'neon-magenta': '#ff2bd6',
+                        'neon-violet': '#7a3bff',
+                        'neon-rose': '#ff4f7b',
+                        'cyber-ink': '#06020f',
+                        'cyber-night': '#0d0820',
+                    },
+                    fontFamily: {
+                        'orbitron': ['Orbitron', 'sans-serif'],
+                        'mono-data': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
     <!-- 加密的 Google Analytics 代碼 -->
 <script>
     // 使用 Base64 + 簡單混淆加密 GA 代碼
@@ -36,27 +59,36 @@
     });
 </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-            --wuwa-ink: #0b1020;
-            --wuwa-night: #111827;
-            --wuwa-mist: #e6eef7;
-            --wuwa-cloud: #f5f7fb;
-            --wuwa-cyan: #5ad7d8;
-            --wuwa-teal: #18b7b3;
-            --wuwa-emerald: #22c39a;
-            --wuwa-amber: #d6b35f;
-            --wuwa-rose: #ef7d8c;
-            --wuwa-shadow: rgba(6, 12, 26, 0.45);
+            --wuwa-ink: #06020f;
+            --wuwa-night: #0d0820;
+            --wuwa-cyan: #00f0ff;
+            --wuwa-teal: #08d6c8;
+            --wuwa-emerald: #00ffa3;
+            --wuwa-amber: #ffb347;
+            --wuwa-rose: #ff4f7b;
+            --wuwa-magenta: #ff2bd6;
+            --wuwa-violet: #7a3bff;
+            --wuwa-glow-cyan: 0 0 12px #00f0ff, 0 0 32px rgba(0, 240, 255, 0.4);
+            --wuwa-glow-magenta: 0 0 12px #ff2bd6, 0 0 32px rgba(255, 43, 214, 0.4);
+            --wuwa-glow-violet: 0 0 12px #7a3bff, 0 0 32px rgba(122, 59, 255, 0.4);
+            --wuwa-glow-emerald: 0 0 12px #00ffa3, 0 0 32px rgba(0, 255, 163, 0.4);
+            --wuwa-glow-amber: 0 0 12px #ffb347, 0 0 32px rgba(255, 179, 71, 0.4);
+            --wuwa-hero: url("https://images.igdb.com/igdb/image/upload/t_720p/scuir8.png");
+            --wuwa-keyart: url("https://images.igdb.com/igdb/image/upload/t_720p/ar4pw6.png");
+            --wuwa-scene-1: url("image/4565878123.jpg");
+            --wuwa-scene-2: url("https://images.igdb.com/igdb/image/upload/t_720p/scuira.png");
+            --wuwa-artwork: url("https://images.igdb.com/igdb/image/upload/t_720p/ar1nwd.png");
         }
         
-        body {
+body {
             font-family: 'Noto Sans TC', sans-serif;
             background:
-                radial-gradient(900px 520px at 12% 12%, rgba(90, 215, 216, 0.22), transparent 60%),
-                radial-gradient(900px 520px at 88% 18%, rgba(214, 179, 95, 0.2), transparent 60%),
-                linear-gradient(135deg, #0b1020 0%, #101a2b 45%, #1b2b3f 100%);
+                radial-gradient(900px 520px at 12% 12%, rgba(0, 240, 255, 0.18), transparent 60%),
+                radial-gradient(900px 520px at 88% 18%, rgba(255, 43, 214, 0.14), transparent 60%),
+                linear-gradient(135deg, #06020f 0%, #1a0a3d 45%, #0d0820 100%);
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -67,11 +99,11 @@
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(1200px 600px at 10% 10%, rgba(90, 215, 216, 0.2), transparent 60%),
-                radial-gradient(900px 500px at 90% 20%, rgba(214, 179, 95, 0.16), transparent 55%),
+                radial-gradient(1200px 600px at 10% 10%, rgba(0, 240, 255, 0.08), transparent 60%),
+                radial-gradient(900px 500px at 90% 20%, rgba(255, 43, 214, 0.06), transparent 55%),
+                linear-gradient(180deg, rgba(6, 2, 15, 0.75), rgba(6, 2, 15, 0.85)),
                 var(--wuwa-scene-1) center / cover no-repeat;
-            opacity: 0.2;
-            mix-blend-mode: screen;
+            background-attachment: fixed;
             pointer-events: none;
             z-index: 0;
         }
@@ -81,18 +113,23 @@
             z-index: 1;
         }
         
-        .card {
+.card {
             background: rgba(245, 247, 251, 0.96);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 26px 60px rgba(8, 16, 32, 0.32), 0 0 0 1px rgba(255,255,255,0.08);
             margin-bottom: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
             position: relative;
             overflow: hidden;
             isolation: isolate;
+        }
+
+        @supports (backdrop-filter: blur(10px)) {
+            .card {
+                backdrop-filter: blur(10px);
+            }
         }
 
         .card > * {
@@ -103,14 +140,15 @@
         .card::after {
             content: "";
             position: absolute;
-            right: -60px;
-            top: -60px;
-            width: 220px;
-            height: 220px;
+            right: -100px;
+            top: -100px;
+            width: 200px;
+            height: 200px;
             background: var(--wuwa-artwork) center / cover no-repeat;
-            opacity: 0.07;
-            transform: rotate(8deg);
+            opacity: 0.05;
+            mix-blend-mode: screen;
             pointer-events: none;
+            z-index: 0;
         }
 
         .card.theme-1::before,
@@ -126,27 +164,27 @@
             filter: saturate(1.15) contrast(1.05);
         }
 
-        .card.theme-1::before {
+.card.theme-1::before {
             background:
-                linear-gradient(135deg, rgba(90, 215, 216, 0.18), rgba(255, 255, 255, 0.0)),
+                linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(255, 255, 255, 0.0)),
                 var(--wuwa-scene-1) center / cover no-repeat;
         }
 
         .card.theme-2::before {
             background:
-                linear-gradient(135deg, rgba(34, 195, 154, 0.16), rgba(255, 255, 255, 0.0)),
+                linear-gradient(135deg, rgba(0, 255, 163, 0.12), rgba(255, 255, 255, 0.0)),
                 var(--wuwa-scene-2) center / cover no-repeat;
         }
 
         .card.theme-3::before {
             background:
-                linear-gradient(135deg, rgba(90, 215, 216, 0.16), rgba(255, 255, 255, 0.0)),
+                linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(255, 255, 255, 0.0)),
                 var(--wuwa-hero) center / cover no-repeat;
         }
 
         .card.theme-4::before {
             background:
-                linear-gradient(135deg, rgba(214, 179, 95, 0.2), rgba(255, 255, 255, 0.0)),
+                linear-gradient(135deg, rgba(255, 43, 214, 0.14), rgba(255, 255, 255, 0.0)),
                 var(--wuwa-artwork) center / cover no-repeat;
         }
         
@@ -165,20 +203,20 @@
             color: #334155;
         }
         
-        .material-green { color: #169a85; }
-        .material-blue { color: #3aa0b3; }
-        .material-purple { color: #6b7bd6; }
-        .material-gold { color: #b88d33; }
+.material-green { color: #00ffa3; }
+        .material-blue { color: #00f0ff; }
+        .material-purple { color: #7a3bff; }
+        .material-gold { color: #ffb347; }
         
-        .btn-primary {
-            background: linear-gradient(135deg, #0e9399, #18b7b3);
+.btn-primary {
+            background: linear-gradient(135deg, #00f0ff, #08d6c8);
             border: none;
-            color: white;
+            color: #06020f;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(14, 147, 153, 0.35);
+            box-shadow: 0 8px 25px rgba(0, 240, 255, 0.35);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -186,25 +224,25 @@
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(14, 147, 153, 0.45);
-            background: linear-gradient(135deg, #0b7c82, #12a7a4);
+            box-shadow: 0 12px 35px rgba(0, 240, 255, 0.55), 0 0 20px rgba(0, 240, 255, 0.2);
+            background: linear-gradient(135deg, #08d6c8, #00f0ff);
         }
         
         .btn-primary:active {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.5);
             transition: all 0.1s ease;
         }
         
         .btn-primary:focus {
             outline: none;
-            box-shadow: 0 8px 25px rgba(14, 147, 153, 0.35), 0 0 0 3px rgba(14, 147, 153, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 240, 255, 0.35), 0 0 0 3px rgba(0, 240, 255, 0.25);
         }
         
-        .btn-secondary {
-            background: linear-gradient(135deg, #1f2937, #334155);
-            border: none;
-            color: white;
+.btn-secondary {
+            background: linear-gradient(135deg, #0d0820, #1a0a3d);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            color: #e6eef7;
             padding: 8px 16px;
             border-radius: 10px;
             font-weight: 500;
@@ -216,8 +254,9 @@
         
         .btn-secondary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.35);
-            background: linear-gradient(135deg, #0f172a, #1f2937);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.25), 0 0 16px rgba(0, 240, 255, 0.12);
+            background: linear-gradient(135deg, #1a0a3d, #0d0820);
+            border-color: rgba(0, 240, 255, 0.55);
         }
         
         .btn-secondary:active {
@@ -227,18 +266,18 @@
         
         .btn-secondary:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.35);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.35);
         }
         
-        .btn-success {
-            background: linear-gradient(135deg, #22c39a, #11998e);
+.btn-success {
+            background: linear-gradient(135deg, #00ffa3, #08d6c8);
             border: none;
-            color: white;
+            color: #06020f;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(34, 195, 154, 0.35);
+            box-shadow: 0 8px 25px rgba(0, 255, 163, 0.35);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -246,30 +285,30 @@
         
         .btn-success:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(34, 195, 154, 0.45);
-            background: linear-gradient(135deg, #0f8b7a, #0b7468);
+            box-shadow: 0 12px 35px rgba(0, 255, 163, 0.55), 0 0 20px rgba(0, 255, 163, 0.2);
+            background: linear-gradient(135deg, #08d6c8, #00ffa3);
         }
         
-        .btn-success:active {
+.btn-success:active {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 255, 163, 0.5);
             transition: all 0.1s ease;
         }
         
         .btn-success:focus {
             outline: none;
-            box-shadow: 0 8px 25px rgba(34, 195, 154, 0.35), 0 0 0 3px rgba(34, 195, 154, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 255, 163, 0.35), 0 0 0 3px rgba(0, 255, 163, 0.25);
         }
         
-        .btn-warning {
-            background: linear-gradient(135deg, #d6b35f, #c49334);
+.btn-warning {
+            background: linear-gradient(135deg, #ffb347, #ff4f7b);
             border: none;
-            color: white;
+            color: #06020f;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(214, 179, 95, 0.35);
+            box-shadow: 0 8px 25px rgba(255, 179, 71, 0.35);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -277,30 +316,30 @@
         
         .btn-warning:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(214, 179, 95, 0.45);
-            background: linear-gradient(135deg, #b98a2b, #a7771d);
+            box-shadow: 0 12px 35px rgba(255, 79, 123, 0.55), 0 0 20px rgba(255, 179, 71, 0.2);
+            background: linear-gradient(135deg, #ff4f7b, #ffb347);
         }
         
         .btn-warning:active {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.5);
             transition: all 0.1s ease;
         }
         
         .btn-warning:focus {
             outline: none;
-            box-shadow: 0 8px 25px rgba(214, 179, 95, 0.35), 0 0 0 3px rgba(214, 179, 95, 0.25);
+            box-shadow: 0 8px 25px rgba(255, 179, 71, 0.35), 0 0 0 3px rgba(255, 179, 71, 0.25);
         }
         
-        .btn-info {
-            background: linear-gradient(135deg, #5ad7d8, #2fbfd1);
+.btn-info {
+            background: linear-gradient(135deg, #00f0ff, #7a3bff);
             border: none;
-            color: white;
+            color: #06020f;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(47, 191, 209, 0.35);
+            box-shadow: 0 8px 25px rgba(122, 59, 255, 0.35);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -308,25 +347,26 @@
         
         .btn-info:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(47, 191, 209, 0.45);
-            background: linear-gradient(135deg, #2aa5b8, #1e8a9c);
+            box-shadow: 0 12px 35px rgba(122, 59, 255, 0.55), 0 0 20px rgba(0, 240, 255, 0.2);
+            background: linear-gradient(135deg, #7a3bff, #00f0ff);
         }
         
         .btn-info:active {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+            box-shadow: 0 6px 20px rgba(122, 59, 255, 0.5);
             transition: all 0.1s ease;
         }
         
         .btn-info:focus {
             outline: none;
-            box-shadow: 0 8px 25px rgba(47, 191, 209, 0.35), 0 0 0 3px rgba(47, 191, 209, 0.25);
+            box-shadow: 0 8px 25px rgba(122, 59, 255, 0.35), 0 0 0 3px rgba(122, 59, 255, 0.25);
         }
         
         .slider-track {
-            background: linear-gradient(to right, #e2e8f0 0%, #18b7b3 100%);
+            background: linear-gradient(to right, #1a0a3d 0%, #7a3bff 50%, #00f0ff 100%);
             height: 6px;
             border-radius: 3px;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
         }
         
         .input-field {
@@ -339,18 +379,18 @@
         }
         
         .input-field:focus {
-            border-color: #18b7b3;
+            border-color: #00f0ff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(24, 183, 179, 0.12);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.12);
         }
         
         .status-success {
-            color: #0f9b78;
+            color: #00ffa3;
             font-weight: 600;
         }
         
         .status-error {
-            color: #e35d6a;
+            color: #ff4f7b;
             font-weight: 600;
         }
         
@@ -399,61 +439,18 @@
             transition: 0s;
         }
         
-        /* 脈衝增強效果 */
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .btn-heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        
-        /* 呼吸燈效果 */
-        @keyframes breathe {
-            0%, 100% { 
-                box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-                transform: scale(1);
+        /* 脈衝光暈效果（取代 heartbeat/breathe/wiggle/bounce） */
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), 0 0 24px rgba(0, 240, 255, 0.15);
             }
-            50% { 
-                box-shadow: 0 8px 35px rgba(99, 102, 241, 0.6);
-                transform: scale(1.02);
+            50% {
+                box-shadow: 0 0 18px rgba(0, 240, 255, 0.5), 0 0 36px rgba(0, 240, 255, 0.25);
             }
         }
         
-        .btn-breathe {
-            animation: breathe 3s ease-in-out infinite;
-        }
-        
-        /* 搖擺效果 */
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(3deg); }
-            75% { transform: rotate(-3deg); }
-        }
-        
-        .btn-wiggle:hover {
-            animation: wiggle 0.5s ease-in-out;
-        }
-        
-        /* 彈跳效果 */
-        @keyframes bounce {
-            0%, 20%, 53%, 80%, 100% {
-                transform: translate3d(0,0,0);
-            }
-            40%, 43% {
-                transform: translate3d(0,-10px,0);
-            }
-            70% {
-                transform: translate3d(0,-5px,0);
-            }
-            90% {
-                transform: translate3d(0,-2px,0);
-            }
-        }
-        
-        .btn-bounce:hover {
-            animation: bounce 1s ease;
+        .btn-glow-pulse {
+            animation: glow-pulse 2s ease-in-out infinite;
         }
         
         /* loading 旋轉動畫 */
@@ -482,30 +479,19 @@
             animation: spin 1s linear infinite;
         }
         
-        /* 成功提示動畫 */
-        @keyframes checkmark {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        .btn-success-check::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: checkmark 0.6s ease;
-        }
-        
         .report-section {
             background: rgba(245, 247, 251, 0.98);
             color: #0f172a;
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 25px 60px rgba(8, 16, 32, 0.32), 0 0 0 1px rgba(255,255,255,0.08);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @supports (backdrop-filter: blur(10px)) {
+            .report-section {
+                backdrop-filter: blur(10px);
+            }
         }
         
         .header-title {
@@ -518,27 +504,13 @@
             text-shadow: 0 2px 6px rgba(7, 15, 30, 0.5);
         }
 
-        .accent-divider {
-            height: 120px;
-            border-radius: 24px;
-            margin: 18px 0 28px;
-            background:
-                linear-gradient(135deg, rgba(10, 17, 30, 0.35), rgba(255, 255, 255, 0.18)),
-                var(--wuwa-scene-2) center / cover no-repeat;
-            box-shadow: 0 18px 40px rgba(7, 15, 30, 0.45);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
         @media (max-width: 640px) {
             .page-bg {
                 background:
-                    radial-gradient(900px 420px at 10% 10%, rgba(255, 255, 255, 0.16), transparent 60%),
-                    radial-gradient(700px 380px at 90% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
+                    radial-gradient(900px 420px at 10% 10%, rgba(0, 240, 255, 0.06), transparent 60%),
+                    radial-gradient(700px 380px at 90% 20%, rgba(255, 43, 214, 0.04), transparent 55%),
+                    linear-gradient(180deg, rgba(6, 2, 15, 0.75), rgba(6, 2, 15, 0.85)),
                     var(--wuwa-scene-1) center / cover no-repeat;
-            }
-
-            .accent-divider {
-                height: 90px;
             }
         }
         
@@ -569,7 +541,7 @@
         
         .language-btn:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(90, 215, 216, 0.35);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.35);
         }
         
         .language-btn.active {
@@ -649,22 +621,14 @@
             opacity: 0.8;
         }
 
-        :root {
-            --wuwa-hero: url("https://images.igdb.com/igdb/image/upload/t_720p/scuir8.png");
-            --wuwa-keyart: url("https://images.igdb.com/igdb/image/upload/t_720p/ar4pw6.png");
-            --wuwa-scene-1: url("https://images.igdb.com/igdb/image/upload/t_720p/scuir7.png");
-            --wuwa-scene-2: url("https://images.igdb.com/igdb/image/upload/t_720p/scuira.png");
-            --wuwa-artwork: url("https://images.igdb.com/igdb/image/upload/t_720p/ar1nwd.png");
-        }
-
-        .hero {
+.hero {
             position: relative;
             padding: 48px 24px;
             border-radius: 24px;
             background:
-                linear-gradient(135deg, rgba(79, 70, 229, 0.72), rgba(124, 58, 237, 0.72), rgba(236, 72, 153, 0.72)),
+                linear-gradient(135deg, rgba(0, 240, 255, 0.55), rgba(255, 43, 214, 0.55), rgba(122, 59, 255, 0.55)),
                 var(--wuwa-hero) center/cover no-repeat;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.25);
             overflow: hidden;
         }
 
@@ -697,9 +661,9 @@
         <!-- Header with Language Selector -->
         <div class="text-center mb-8 hero">
             <div class="flex justify-end mb-4">
-                <div class="flex gap-2">
-                    <button id="lang-zh" class="language-btn active" data-lang="zh">中文</button>
-                    <button id="lang-en" class="language-btn" data-lang="en">English</button>
+                <div class="flex gap-2" role="group" aria-label="Language selector">
+                    <button id="lang-zh" class="language-btn active" data-lang="zh" aria-pressed="true">中文</button>
+                    <button id="lang-en" class="language-btn" data-lang="en" aria-pressed="false">English</button>
                 </div>
             </div>
             <h1 class="text-4xl font-bold header-title mb-2" data-i18n="title">🎮 Sid的鳴潮智慧素材需求計算器</h1>
@@ -820,28 +784,32 @@
                 </div>
 
                 <!-- 目標需求 -->
-                <div class="card theme-4">
-                    <h2 class="text-xl card-title flex items-center mb-4" data-i18n="target.title">
+                <div class="card theme-4" aria-labelledby="target-title">
+                    <h2 id="target-title" class="text-xl card-title flex items-center mb-4" data-i18n="target.title">
                         🎯 目標需求總計
                     </h2>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-green-50 rounded-lg p-4 text-center border-2 border-green-200">
-                            <div class="text-2xl mb-2">🟢</div>
+                        <div class="bg-emerald-50 rounded-lg p-4 text-center border-2 border-emerald-200" role="status" aria-label="Tier 1 Green material target">
+                            <div class="text-2xl mb-1" aria-hidden="true">🟢</div>
+                            <div class="text-xs font-bold text-emerald-700 mb-1">T1</div>
                             <div class="text-sm card-content font-medium mb-1" data-i18n="materials.green">綠色素材</div>
                             <div id="target-green" class="text-2xl font-bold material-green">0</div>
                         </div>
-                        <div class="bg-blue-50 rounded-lg p-4 text-center border-2 border-blue-200">
-                            <div class="text-2xl mb-2">🔵</div>
+                        <div class="bg-cyan-50 rounded-lg p-4 text-center border-2 border-cyan-200" role="status" aria-label="Tier 2 Blue material target">
+                            <div class="text-2xl mb-1" aria-hidden="true">🔵</div>
+                            <div class="text-xs font-bold text-cyan-700 mb-1">T2</div>
                             <div class="text-sm card-content font-medium mb-1" data-i18n="materials.blue">藍色素材</div>
                             <div id="target-blue" class="text-2xl font-bold material-blue">0</div>
                         </div>
-                        <div class="bg-purple-50 rounded-lg p-4 text-center border-2 border-purple-200">
-                            <div class="text-2xl mb-2">🟣</div>
+                        <div class="bg-violet-50 rounded-lg p-4 text-center border-2 border-violet-200" role="status" aria-label="Tier 3 Purple material target">
+                            <div class="text-2xl mb-1" aria-hidden="true">🟣</div>
+                            <div class="text-xs font-bold text-violet-700 mb-1">T3</div>
                             <div class="text-sm card-content font-medium mb-1" data-i18n="materials.purple">紫色素材</div>
                             <div id="target-purple" class="text-2xl font-bold material-purple">0</div>
                         </div>
-                        <div class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200">
-                            <div class="text-2xl mb-2">🟡</div>
+                        <div class="bg-amber-50 rounded-lg p-4 text-center border-2 border-amber-200" role="status" aria-label="Tier 4 Gold material target">
+                            <div class="text-2xl mb-1" aria-hidden="true">🟡</div>
+                            <div class="text-xs font-bold text-amber-700 mb-1">T4</div>
                             <div class="text-sm card-content font-medium mb-1" data-i18n="materials.gold">金色素材</div>
                             <div id="target-gold" class="text-2xl font-bold material-gold">0</div>
                         </div>
@@ -851,40 +819,48 @@
         </div>
 
         <!-- 第二區塊：持有數量輸入 -->
-        <div class="card mb-8 theme-1">
-            <h2 class="text-2xl card-title flex items-center mb-6" data-i18n="current.title">
+        <div class="card mb-8 theme-1" aria-labelledby="current-h">
+            <h2 id="current-h" class="text-2xl card-title flex items-center mb-6" data-i18n="current.title">
                 📦 當前持有數量
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="text-center">
-                    <div class="bg-green-50 rounded-xl p-4 mb-4 border-2 border-green-200 hover:border-green-300 transition-colors">
-                        <span class="text-3xl block mb-2">🟢</span>
+                    <div class="bg-emerald-50 rounded-xl p-4 mb-4 border-2 border-emerald-200 hover:border-emerald-300 transition-colors">
+                        <span class="text-3xl block mb-1" aria-hidden="true">🟢</span>
+                        <div class="text-xs font-bold text-emerald-700 mb-1">T1</div>
                         <p class="text-base font-semibold material-green mb-2" data-i18n="materials.green">綠色素材</p>
                     </div>
+                    <label for="current-green" class="sr-only">Tier 1 Green material current</label>
                     <input type="number" id="current-green" value="0" min="0" 
                            class="input-field w-full text-center text-lg font-semibold" placeholder="0">
                 </div>
                 <div class="text-center">
-                    <div class="bg-blue-50 rounded-xl p-4 mb-4 border-2 border-blue-200 hover:border-blue-300 transition-colors">
-                        <span class="text-3xl block mb-2">🔵</span>
+                    <div class="bg-cyan-50 rounded-xl p-4 mb-4 border-2 border-cyan-200 hover:border-cyan-300 transition-colors">
+                        <span class="text-3xl block mb-1" aria-hidden="true">🔵</span>
+                        <div class="text-xs font-bold text-cyan-700 mb-1">T2</div>
                         <p class="text-base font-semibold material-blue mb-2" data-i18n="materials.blue">藍色素材</p>
                     </div>
+                    <label for="current-blue" class="sr-only">Tier 2 Blue material current</label>
                     <input type="number" id="current-blue" value="0" min="0" 
                            class="input-field w-full text-center text-lg font-semibold" placeholder="0">
                 </div>
                 <div class="text-center">
-                    <div class="bg-purple-50 rounded-xl p-4 mb-4 border-2 border-purple-200 hover:border-purple-300 transition-colors">
-                        <span class="text-3xl block mb-2">🟣</span>
+                    <div class="bg-violet-50 rounded-xl p-4 mb-4 border-2 border-violet-200 hover:border-violet-300 transition-colors">
+                        <span class="text-3xl block mb-1" aria-hidden="true">🟣</span>
+                        <div class="text-xs font-bold text-violet-700 mb-1">T3</div>
                         <p class="text-base font-semibold material-purple mb-2" data-i18n="materials.purple">紫色素材</p>
                     </div>
+                    <label for="current-purple" class="sr-only">Tier 3 Purple material current</label>
                     <input type="number" id="current-purple" value="0" min="0" 
                            class="input-field w-full text-center text-lg font-semibold" placeholder="0">
                 </div>
                 <div class="text-center">
-                    <div class="bg-yellow-50 rounded-xl p-4 mb-4 border-2 border-yellow-200 hover:border-yellow-300 transition-colors">
-                        <span class="text-3xl block mb-2">🟡</span>
+                    <div class="bg-amber-50 rounded-xl p-4 mb-4 border-2 border-amber-200 hover:border-amber-300 transition-colors">
+                        <span class="text-3xl block mb-1" aria-hidden="true">🟡</span>
+                        <div class="text-xs font-bold text-amber-700 mb-1">T4</div>
                         <p class="text-base font-semibold material-gold mb-2" data-i18n="materials.gold">金色素材</p>
                     </div>
+                    <label for="current-gold" class="sr-only">Tier 4 Gold material current</label>
                     <input type="number" id="current-gold" value="0" min="0" 
                            class="input-field w-full text-center text-lg font-semibold" placeholder="0">
                 </div>
@@ -957,10 +933,10 @@
             </div>
 
             <!-- 最佳合成策略 -->
-            <div class="card theme-4">
-                <h2 class="text-xl card-title flex items-center mb-6" data-i18n="strategy.title">
+            <div class="card theme-4" aria-labelledby="strategy-h">
+                <h2 id="strategy-h" class="text-xl card-title flex items-center mb-6" data-i18n="strategy.title">
                     🧠 最佳合成策略
-                    <span class="ml-3 px-3 py-1 bg-blue-500 text-white text-sm rounded-full animate-pulse" data-i18n="strategy.smart">智慧推薦</span>
+                    <span class="ml-3 px-3 py-1 bg-cyan-500 text-white text-sm rounded-full animate-pulse" data-i18n="strategy.smart" role="status" aria-live="polite">智慧推薦</span>
                 </h2>
                 <div id="strategy-display" class="space-y-3">
                     <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
@@ -972,31 +948,35 @@
 
         <!-- Execution Result Preview -->
         <div class="mt-8">
-            <div class="card theme-1">
-                <h2 class="text-2xl card-title flex items-center" data-i18n="preview.title">
+            <div class="card theme-1" aria-labelledby="preview-h">
+                <h2 id="preview-h" class="text-2xl card-title flex items-center" data-i18n="preview.title">
                     🔄 執行後預覽
                 </h2>
                 <div id="execution-preview" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-green-50 rounded-lg p-4 text-center border-2 border-green-200">
-                        <div class="text-2xl mb-2">🟢</div>
+                    <div class="bg-emerald-50 rounded-lg p-4 text-center border-2 border-emerald-200" role="status" aria-label="Tier 1 Green material preview">
+                        <div class="text-2xl mb-1" aria-hidden="true">🟢</div>
+                        <div class="text-xs font-bold text-emerald-700 mb-1">T1</div>
                         <div class="text-sm card-content font-medium" data-i18n="materials.green">綠色素材</div>
                         <div id="preview-green" class="text-lg font-bold material-green">-</div>
                         <div id="preview-green-status" class="text-xs card-content">-</div>
                     </div>
-                    <div class="bg-blue-50 rounded-lg p-4 text-center border-2 border-blue-200">
-                        <div class="text-2xl mb-2">🔵</div>
+                    <div class="bg-cyan-50 rounded-lg p-4 text-center border-2 border-cyan-200" role="status" aria-label="Tier 2 Blue material preview">
+                        <div class="text-2xl mb-1" aria-hidden="true">🔵</div>
+                        <div class="text-xs font-bold text-cyan-700 mb-1">T2</div>
                         <div class="text-sm card-content font-medium" data-i18n="materials.blue">藍色素材</div>
                         <div id="preview-blue" class="text-lg font-bold material-blue">-</div>
                         <div id="preview-blue-status" class="text-xs card-content">-</div>
                     </div>
-                    <div class="bg-purple-50 rounded-lg p-4 text-center border-2 border-purple-200">
-                        <div class="text-2xl mb-2">🟣</div>
+                    <div class="bg-violet-50 rounded-lg p-4 text-center border-2 border-violet-200" role="status" aria-label="Tier 3 Purple material preview">
+                        <div class="text-2xl mb-1" aria-hidden="true">🟣</div>
+                        <div class="text-xs font-bold text-violet-700 mb-1">T3</div>
                         <div class="text-sm card-content font-medium" data-i18n="materials.purple">紫色素材</div>
                         <div id="preview-purple" class="text-lg font-bold material-purple">-</div>
                         <div id="preview-purple-status" class="text-xs card-content">-</div>
                     </div>
-                    <div class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200">
-                        <div class="text-2xl mb-2">🟡</div>
+                    <div class="bg-amber-50 rounded-lg p-4 text-center border-2 border-amber-200" role="status" aria-label="Tier 4 Gold material preview">
+                        <div class="text-2xl mb-1" aria-hidden="true">🟡</div>
+                        <div class="text-xs font-bold text-amber-700 mb-1">T4</div>
                         <div class="text-sm card-content font-medium" data-i18n="materials.gold">金色素材</div>
                         <div id="preview-gold" class="text-lg font-bold material-gold">-</div>
                         <div id="preview-gold-status" class="text-xs card-content">-</div>
@@ -1368,6 +1348,7 @@
             // Update language button states
             document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
                 if (btn.dataset.lang === lang) {
                     btn.classList.add('active');
                 }
@@ -1554,7 +1535,7 @@
         function showMessage(message) {
             // Create temporary message display
             const messageEl = document.createElement('div');
-            messageEl.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            messageEl.className = 'fixed top-4 right-4 bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
             messageEl.textContent = message;
             document.body.appendChild(messageEl);
             
@@ -2455,7 +2436,7 @@
                 strategyDisplay.innerHTML = `<p class="text-green-600 font-semibold">${noSynthesisText}</p>`;
             } else {
                 strategyDisplay.innerHTML = strategy.map(step => 
-                    `<div class="bg-blue-50 p-2 rounded border-l-4 border-blue-400">${step}</div>`
+                    `<div class="bg-cyan-50 p-2 rounded border-l-4 border-cyan-400">${step}</div>`
                 ).join('');
             }
 
@@ -2559,14 +2540,11 @@
                 // Add ripple class
                 button.classList.add('btn-ripple');
                 
-                // Add click feedback
+                // Add click feedback (glow-pulse for primary/success/info)
                 button.addEventListener('click', function(e) {
-                    // Add bounce effect for important buttons
-                    if (this.classList.contains('btn-primary') || this.classList.contains('btn-success')) {
-                        this.style.animation = 'none';
-                        setTimeout(() => {
-                            this.style.animation = 'bounce 0.6s ease';
-                        }, 10);
+                    if (this.classList.contains('btn-primary') || this.classList.contains('btn-success') || this.classList.contains('btn-info')) {
+                        this.classList.add('btn-glow-pulse');
+                        setTimeout(() => this.classList.remove('btn-glow-pulse'), 1200);
                     }
                     
                     // Show loading state for action buttons
@@ -2578,42 +2556,21 @@
                         }, 800);
                     }
                 });
-                
-                // Add wiggle effect on hover for secondary buttons
-                if (button.classList.contains('btn-secondary')) {
-                    button.classList.add('btn-wiggle');
-                }
-                
-                // Add breathe effect for special buttons
-                if (button.id === 'save-record-btn') {
-                    button.classList.add('btn-breathe');
-                }
             });
             
-            // Add special effects to skill level buttons
+            // Add glow-pulse effect to skill level buttons on click
             const skillButtons = document.querySelectorAll('#skill-level-6, #skill-level-8, #skill-level-10');
             skillButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Add heartbeat effect
-                    this.classList.add('btn-heartbeat');
-                    setTimeout(() => {
-                        this.classList.remove('btn-heartbeat');
-                    }, 1500);
+                    this.classList.add('btn-glow-pulse');
+                    setTimeout(() => this.classList.remove('btn-glow-pulse'), 1500);
                 });
             });
             
-            // Add special hover effects to language buttons
+            // Add subtle focus-ring to language buttons (no wiggle)
             const langButtons = document.querySelectorAll('.language-btn');
             langButtons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.animation = 'wiggle 0.5s ease';
-                    }
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.animation = '';
-                });
+                // hover effect handled by CSS; no JS animation
             });
         }
         
@@ -2638,12 +2595,12 @@
         // Show button success state
         function showButtonSuccess(button) {
             const originalBg = button.style.background;
-            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-            button.classList.add('btn-success-check');
+            button.style.background = 'linear-gradient(135deg, #00ffa3, #08d6c8)';
+            button.classList.add('btn-glow-pulse');
             
             setTimeout(() => {
                 button.style.background = originalBg;
-                button.classList.remove('btn-success-check');
+                button.classList.remove('btn-glow-pulse');
             }, 1500);
         }
         
