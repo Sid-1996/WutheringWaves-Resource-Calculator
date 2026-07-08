@@ -87,7 +87,7 @@ This tool is for educational and fan-use only. Commercial use is prohibited.
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K11KMXOL)  
 
-[🔗 Support This Project (PayPal)](https://www.paypal.com/ncp/payment/9TGC4B3MYM9A6)  
+[🔗 Support This Project (PayPal)](https://www.paypal.com/ncp/payment/GJS4D5VTSVWG4)  
 
 [💚 綠界科技贊助（支持作者）](https://p.ecpay.com.tw/E0E3A)  
 
